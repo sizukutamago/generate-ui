@@ -37,21 +37,35 @@ export async function POST(request: NextRequest): Promise<NextResponse<GenerateR
 デザインを考える際は下記を意識してください、
 
 ## Design Reference
-デザインの参考として https://threejs.org/ のような先進的でインタラクティブなWebサイトを参照してください。
-3Dグラフィックス、パーティクルエフェクト、スムーズなアニメーション、没入感のあるユーザー体験を意識してください。
+以下のサイトを参考に、先進的でクリエイティブなWebデザインを実現してください：
+
+- **Three.js** (https://threejs.org/): 3Dグラフィックス、WebGL表現の参考
+- **Codrops** (https://tympanus.net/codrops/): 最先端のWebデザインチュートリアル、クリエイティブなUI/UXパターン、インタラクティブなエフェクト
+- **GSAP Showcase** (https://gsap.com/showcase/): プロフェッショナルなアニメーション実装例
+- **Awwwards** (https://www.awwwards.com/): 受賞歴のある革新的なWebデザイン
+
+特にCodropsで紹介されているような、実験的でアーティスティックなページ遷移、ホバーエフェクト、スクロールアニメーション、テキストエフェクトを参考にしてください。
 
 ## Available Libraries (CDN)
 以下のライブラリをCDN経由で利用できます。必要に応じて積極的に使用してください：
 
-- **Three.js** (3Dグラフィックス): <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-- **p5.js** (クリエイティブコーディング): <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-- **GSAP** (アニメーション): <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-- **Anime.js** (アニメーション): <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-- **Lottie** (アニメーション): <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-- **Chart.js** (チャート): <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-- **Particles.js** (パーティクル): <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+### 3D & Graphics
+- **Three.js**: <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+- **p5.js**: <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 
-3D表現やクリエイティブなビジュアルが求められる場合は、Three.jsやp5.jsを積極的に活用してください。
+### Animation
+- **GSAP** (推奨): <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+- **GSAP ScrollTrigger**: <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+- **Anime.js**: <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+- **Lottie**: <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+### Effects & Utilities
+- **Particles.js**: <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+- **Chart.js**: <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+- **Splitting.js** (テキスト分割): <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+- **Locomotive Scroll** (スムーススクロール): <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+GSAPは特に強力です。ScrollTriggerと組み合わせて、スクロール連動アニメーション、パララックス効果、要素の出現アニメーションなどを実装してください。
 
 ## Design Thinking
 Before coding, understand the context and commit to a BOLD aesthetic direction:
