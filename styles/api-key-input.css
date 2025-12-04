@@ -1,0 +1,196 @@
+.api-key-container {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+  border-radius: 20px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.api-key-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(6, 182, 212, 0.5),
+    transparent
+  );
+}
+
+.api-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.api-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.api-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #06b6d4;
+}
+
+.api-section-header h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: #e4e8f0;
+}
+
+.api-section-subtitle {
+  font-size: 13px;
+  color: #64748b;
+  margin: 4px 0 0;
+  letter-spacing: 0.02em;
+}
+
+.get-key-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #06b6d4;
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: 8px;
+  transition: all 0.2s;
+  background: rgba(6, 182, 212, 0.05);
+}
+
+.get-key-link:hover {
+  background: rgba(6, 182, 212, 0.1);
+  border-color: rgba(6, 182, 212, 0.5);
+  transform: translateY(-1px);
+}
+
+.api-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.api-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.api-input-icon {
+  position: absolute;
+  left: 18px;
+  color: #64748b;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.api-input {
+  font-family: 'JetBrains Mono', monospace;
+  width: 100%;
+  height: 56px;
+  padding: 0 56px 0 52px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(100, 116, 139, 0.3);
+  border-radius: 12px;
+  color: #e4e8f0;
+  font-size: 14px;
+  transition: all 0.3s;
+  outline: none;
+}
+
+.api-input::placeholder {
+  color: #475569;
+}
+
+.api-input:focus {
+  border-color: #06b6d4;
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow:
+    0 0 0 3px rgba(6, 182, 212, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.api-toggle-visibility {
+  position: absolute;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 2;
+}
+
+.api-toggle-visibility:hover {
+  background: rgba(100, 116, 139, 0.1);
+  color: #94a3b8;
+}
+
+.api-input-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #64748b;
+  padding-left: 4px;
+}
+
+.api-hint-dot {
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 640px) {
+  .api-key-container {
+    padding: 24px;
+  }
+
+  .api-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .api-input {
+    font-size: 13px;
+  }
+}
