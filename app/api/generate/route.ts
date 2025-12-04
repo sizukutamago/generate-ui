@@ -67,6 +67,11 @@ export async function POST(request: NextRequest): Promise<NextResponse<GenerateR
 
 GSAPは特に強力です。ScrollTriggerと組み合わせて、スクロール連動アニメーション、パララックス効果、要素の出現アニメーションなどを実装してください。
 
+**重要**: ライブラリを使用する場合は、必ず対応するCDNスクリプトタグをHTMLの<head>または<body>内に含めてください。
+例えば、Three.jsを使用する場合は以下のように記述：
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+スクリプトタグなしでライブラリを使用するとエラーになります。
+
 ## Design Thinking
 Before coding, understand the context and commit to a BOLD aesthetic direction:
 
@@ -104,6 +109,8 @@ Remember: Claude is capable of extraordinary creative work. Don't hold back, sho
 - 完全なHTMLドキュメントを生成（<!DOCTYPE html>から</html>まで）
 - CSSは<style>タグ内に記述
 - JavaScriptは<script>タグ内に記述
+- **外部ライブラリ（Three.js, GSAP, p5.js等）を使用する場合は、必ずCDNスクリプトタグを<head>内に含める**
+  例: <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 - レスポンシブデザイン
 - モダンで美しいデザイン
 - 必要に応じてインタラクティブな要素を含める
@@ -232,6 +239,41 @@ function extractCode(content: string): { html: string; css: string; js: string }
     } else {
       // scriptタグがない場合は注入
       html = html.replace(/<\/body>/i, `  <script>\n${js}\n  </script>\n</body>`);
+    }
+  }
+
+  // CDN自動注入: ライブラリを使用しているがCDNタグがない場合に注入
+  if (html) {
+    const cdnMap: { pattern: RegExp; cdn: string }[] = [
+      { pattern: /\bTHREE\./i, cdn: 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js' },
+      { pattern: /\bgsap\./i, cdn: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js' },
+      { pattern: /\bScrollTrigger\./i, cdn: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js' },
+      { pattern: /\banime\(/i, cdn: 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js' },
+      { pattern: /\bp5\./i, cdn: 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js' },
+      { pattern: /\bparticlesJS\(/i, cdn: 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js' },
+      { pattern: /\bChart\(/i, cdn: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js' },
+      { pattern: /\blottie\./i, cdn: 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js' },
+      { pattern: /\bSplitting\(/i, cdn: 'https://unpkg.com/splitting/dist/splitting.min.js' },
+      { pattern: /\bLocomotiveScroll\(/i, cdn: 'https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js' },
+    ];
+
+    const cdnsToInject: string[] = [];
+    for (const { pattern, cdn } of cdnMap) {
+      // ライブラリを使用しているがCDNタグが含まれていない場合
+      if (pattern.test(html) && !html.includes(cdn)) {
+        cdnsToInject.push(`<script src="${cdn}"></script>`);
+      }
+    }
+
+    if (cdnsToInject.length > 0) {
+      const cdnTags = cdnsToInject.join('\n    ');
+      // </head>の前にCDNタグを注入
+      if (html.includes('</head>')) {
+        html = html.replace(/<\/head>/i, `    ${cdnTags}\n</head>`);
+      } else if (html.includes('<body')) {
+        // headがない場合はbodyの前に注入
+        html = html.replace(/<body/i, `${cdnTags}\n<body`);
+      }
     }
   }
 
